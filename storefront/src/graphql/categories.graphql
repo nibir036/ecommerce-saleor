@@ -1,0 +1,90 @@
+# Get all categories
+query GetCategories {
+  categories(first: 100) {
+    edges {
+      node {
+        id
+        name
+        slug
+        level
+        parent {
+          id
+          name
+        }
+        products(first: 1) {
+          totalCount
+        }
+      }
+    }
+  }
+}
+
+# Get products by category
+query GetProductsByCategory($slug: String!, $first: Int!, $channel: String!) {
+  category(slug: $slug) {
+    id
+    name
+    slug
+    description
+    products(first: $first, channel: $channel) {
+      edges {
+        node {
+          id
+          name
+          slug
+          description
+          thumbnail {
+            url
+            alt
+          }
+          pricing {
+            priceRange {
+              start {
+                gross {
+                  amount
+                  currency
+                }
+              }
+            }
+          }
+          category {
+            id
+            name
+          }
+        }
+      }
+    }
+  }
+}
+
+# Search products
+query SearchProducts($search: String!, $first: Int!, $channel: String!) {
+  products(first: $first, channel: $channel, filter: { search: $search }) {
+    edges {
+      node {
+        id
+        name
+        slug
+        description
+        thumbnail {
+          url
+          alt
+        }
+        pricing {
+          priceRange {
+            start {
+              gross {
+                amount
+                currency
+              }
+            }
+          }
+        }
+        category {
+          id
+          name
+        }
+      }
+    }
+  }
+}
