@@ -202,4 +202,4 @@ For questions or feedback, please open an issue.
 
 ---
 
-Built with ❤️ using Saleor and Next.js
+Built using Saleor and Next.js
